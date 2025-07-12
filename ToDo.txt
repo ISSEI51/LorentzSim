@@ -1,0 +1,7 @@
+ToDo for Investigasion presentation
+
+1. introduce electrick field, simulate particle orbit
+
+2. deciede what to simulate 
+
+3. decide structure of presentation (prepare about 10 slides)

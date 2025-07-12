@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 target of this program:
 this program compare 3patterns of motion in uniform magnetic field.
 the patterns is below
-A. intial velocity: (v0cos, 0, v0sin), magnetic field: (0, 0, B)
-B. intial velocity: (v0cos, 0, v0sin), magnetic field: (0, 0, B)
-C. intial velocity: (v0cos, 0, v0sin), magnetic field: (0, 0, B)
+A. intial velocity: (0, 1, 1), magnetic field: (0, 0, 1)
+B. intial velocity: (0, 0, 1), magnetic field: (0, 1, 0)
+C. intial velocity: (0, 1, 0), magnetic field: (1, 1, 1)
 """
 q = 1.0
 m = 1.0
@@ -76,19 +76,19 @@ def plot_trajectory(states: np.ndarray, title: str):
 
 
 # pattern A: Initial velocity has components in xy and z directions → herical motion
-state_B = np.array([1.0, 0.0, 0.0, 0.0, 1.0, 1.0])
-B_B = np.array([0.0, 0.0, 1.0])
-states_B = rk4(state_B, dt, N, B_B)
-plot_trajectory(states_B, "Pattern A: Helical Motion (B = [0, 0, 1])")
+state_A = np.array([1.0, 0.0, 0.0, 0.0, 1.0, 1.0])
+B_A = np.array([0.0, 0.0, 1.0])
+states_A = rk4(state_A, dt, N, B_A)
+plot_trajectory(states_A, "Pattern A: Helical Motion (B = [0, 0, 1])")
 
 # pattern B: Magnetic field is in y direction → Motion is developed in x-z plane
-state_D = np.array([1.0, 0.0, 0.0, 0.0, 0.0, 1.0])
-B_D = np.array([0.0, 1.0, 0.0])
-states_D = rk4(state_D, dt, N, B_D)
-plot_trajectory(states_D, "Pattern B: Motion in xz-plane (B = [0, 1, 0])")
+state_B = np.array([1.0, 0.0, 0.0, 0.0, 0.0, 1.0])
+B_B = np.array([0.0, 1.0, 0.0])
+states_B = rk4(state_B, dt, N, B_B)
+plot_trajectory(states_B, "Pattern B: Motion in xz-plane (B = [0, 1, 0])")
 
 # pattern C: Magnetic field in any direction (x=y=z) → complex 3-D motion
-state_E = np.array([1.0, 0.0, 0.0, 0.0, 1.0, 0.0])
-B_E = np.array([1.0, 1.0, 1.0])
-states_E = rk4(state_E, dt, N, B_E)
-plot_trajectory(states_E, "Pattern C: 3D Helical Motion (B = [1, 1, 1])")
+state_C = np.array([1.0, 0.0, 0.0, 0.0, 1.0, 0.0])
+B_C = np.array([1.0, 1.0, 1.0])
+states_C = rk4(state_C, dt, N, B_C)
+plot_trajectory(states_C, "Pattern C: 3D Helical Motion (B = [1, 1, 1])")
