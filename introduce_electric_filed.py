@@ -1,26 +1,27 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# 物理定数
+# constant
 q = 1.0
 m = 1.0
 dt = 0.01
 T = 20
 N = int(T / dt)
 
-# 電場（全パターン共通）
-E = np.array([5.0, 0.0, 0.0])  # x方向の電場
+# electric field
+E = np.array([1.0, 0.0, 0.0])
 
 
-# ローレンツ力による運動方程式（EとBの両方）
+# EOM by Lorentz force
 def derivatives(state: np.ndarray, B: np.ndarray, E: np.ndarray) -> np.ndarray:
     x, y, z, vx, vy, vz = state
     v = np.array([vx, vy, vz])
-    a = (q / m) * (E + np.cross(v, B))  # E項を追加
+    # add E term
+    a = (q / m) * (E + np.cross(v, B))
+
     return np.concatenate((v, a))
 
 
-# Runge-Kutta法による時間発展
 def rk4(
     state0: np.ndarray, dt: float, N: int, B: np.ndarray, E: np.ndarray
 ) -> np.ndarray:
@@ -37,19 +38,15 @@ def rk4(
     return states
 
 
-# 描画
 def plot_trajectory(states: np.ndarray, title: str):
     fig = plt.figure(figsize=(6, 6))
     ax = fig.add_subplot(111, projection="3d")
 
-    # 軌道描画
     ax.plot(states[:, 0], states[:, 1], states[:, 2], label=title, color="blue")
 
-    # 出発点を赤い点で表示
     start = states[0]
     ax.scatter(start[0], start[1], start[2], color="red", s=50, label="Start")
 
-    # 軸ラベル・タイトルなど
     ax.set_xlabel("x")
     ax.set_ylabel("y")
     ax.set_zlabel("z")
@@ -60,20 +57,20 @@ def plot_trajectory(states: np.ndarray, title: str):
     plt.show()
 
 
-# Pattern A
-state_A = np.array([1.0, 0.0, 0.0, 0.0, 1.0, 1.0])
+# pattern A
+state_A = np.array([1.0, 0.0, 0.0, 1.0, 0.0, 0.0])
 B_A = np.array([0.0, 0.0, 1.0])
 states_A = rk4(state_A, dt, N, B_A, E)
-plot_trajectory(states_A, "Pattern A + E field")
+plot_trajectory(states_A, "PatternA + Efield")
 
-# Pattern B
-state_B = np.array([1.0, 0.0, 0.0, 0.0, 0.0, 1.0])
-B_B = np.array([0.0, 1.0, 0.0])
+# pattern B
+state_B = np.array([1.0, 0.0, 0.0, 1.0, 1.0, 1.0])
+B_B = np.array([0.0, 0.0, 1.0])
 states_B = rk4(state_B, dt, N, B_B, E)
-plot_trajectory(states_B, "Pattern B + E field")
+plot_trajectory(states_B, "PatternB + Efield")
 
-# Pattern C
-state_C = np.array([1.0, 0.0, 0.0, 0.0, 1.0, 0.0])
+# pattern C
+state_C = np.array([1.0, 0.0, 0.0, 1.0, 1.0, 1.0])
 B_C = np.array([1.0, 1.0, 1.0])
 states_C = rk4(state_C, dt, N, B_C, E)
-plot_trajectory(states_C, "Pattern C + E field")
+plot_trajectory(states_C, "PatternC + Efield")

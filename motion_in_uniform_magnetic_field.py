@@ -69,6 +69,10 @@ def plot_trajectory(states: np.ndarray, title: str):
     ax.set_xlabel("x")
     ax.set_ylabel("y")
     ax.set_zlabel("z")
+
+    start = states[0]
+    ax.scatter(start[0], start[1], start[2], color="red", s=50, label="Start")
+
     ax.set_title(title)
     ax.legend()
     plt.tight_layout()
@@ -76,19 +80,19 @@ def plot_trajectory(states: np.ndarray, title: str):
 
 
 # pattern A: Initial velocity has components in xy and z directions → herical motion
-state_A = np.array([1.0, 0.0, 0.0, 0.0, 1.0, 1.0])
+state_A = np.array([1.0, 0.0, 0.0, 1.0, 0.0, 0.0])
 B_A = np.array([0.0, 0.0, 1.0])
 states_A = rk4(state_A, dt, N, B_A)
-plot_trajectory(states_A, "Pattern A: Helical Motion (B = [0, 0, 1])")
+plot_trajectory(states_A, "Pattern A: circularm motion")
 
 # pattern B: Magnetic field is in y direction → Motion is developed in x-z plane
-state_B = np.array([1.0, 0.0, 0.0, 0.0, 0.0, 1.0])
-B_B = np.array([0.0, 1.0, 0.0])
+state_B = np.array([1.0, 0.0, 0.0, 1.0, 1.0, 1.0])
+B_B = np.array([0.0, 0.0, 1.0])
 states_B = rk4(state_B, dt, N, B_B)
-plot_trajectory(states_B, "Pattern B: Motion in xz-plane (B = [0, 1, 0])")
+plot_trajectory(states_B, "Pattern B: herical motion")
 
 # pattern C: Magnetic field in any direction (x=y=z) → complex 3-D motion
-state_C = np.array([1.0, 0.0, 0.0, 0.0, 1.0, 0.0])
+state_C = np.array([1.0, 0.0, 0.0, 1.0, 1.0, 1.0])
 B_C = np.array([1.0, 1.0, 1.0])
 states_C = rk4(state_C, dt, N, B_C)
-plot_trajectory(states_C, "Pattern C: 3D Helical Motion (B = [1, 1, 1])")
+plot_trajectory(states_C, "Pattern C: straight motion")

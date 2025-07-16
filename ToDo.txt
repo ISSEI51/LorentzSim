@@ -1,6 +1,6 @@
 ToDo for Investigasion presentation
 
-1. introduce electrick field, simulate particle orbit
+1. introduce electric field, simulate particle orbit
 
 2. deciede what to simulate 
 
