@@ -9,7 +9,7 @@ T = 20
 N = int(T / dt)
 
 # electric field
-E = np.array([1.0, 0.0, 0.0])
+E = np.array([0.0, 0.0, 1.0])
 
 
 # EOM by Lorentz force
@@ -61,16 +61,16 @@ def plot_trajectory(states: np.ndarray, title: str):
 state_A = np.array([1.0, 0.0, 0.0, 1.0, 0.0, 0.0])
 B_A = np.array([0.0, 0.0, 1.0])
 states_A = rk4(state_A, dt, N, B_A, E)
-plot_trajectory(states_A, "PatternA + Efield")
+plot_trajectory(states_A, "PatternA + E(1,0,0)")
 
 # pattern B
 state_B = np.array([1.0, 0.0, 0.0, 1.0, 1.0, 1.0])
 B_B = np.array([0.0, 0.0, 1.0])
 states_B = rk4(state_B, dt, N, B_B, E)
-plot_trajectory(states_B, "PatternB + Efield")
+plot_trajectory(states_B, "PatternB + E(1,1,1)")
 
 # pattern C
 state_C = np.array([1.0, 0.0, 0.0, 1.0, 1.0, 1.0])
 B_C = np.array([1.0, 1.0, 1.0])
 states_C = rk4(state_C, dt, N, B_C, E)
-plot_trajectory(states_C, "PatternC + Efield")
+plot_trajectory(states_C, "PatternC + E(0,0,1)")
